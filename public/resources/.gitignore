@@ -1,0 +1,30 @@
+# Ignore build output
+/build
+/dist
+# Ignore node modules
+/node_modules
+# Ignore logs
+/logs
+# Ignore environment variables
+/.env
+# Ignore coverage reports
+/coverage
+# Ignore temporary files
+/tmp
+# Ignore IDE specific files
+/.idea
+/.vscode
+# Ignore OS generated files
+.DS_Store
+# Ignore test output
+/test-output
+# Ignore documentation output
+/docs
+# Ignore package lock files
+/package-lock.json
+# Ignore yarn lock files
+/yarn.lock
+# Ignore npm debug log
+/npm-debug.log
+# Ignore specific configuration files
+/.eslintcache
