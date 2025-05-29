@@ -83,7 +83,7 @@ if (isset($server['forwarded'])) {
 
     function startUpOS() {
         // Simulate starting the OS
-        isRedirectedFromBIOS() && window.location.replace('BIOS/main-setup.php');
+        isRedirectedFromBIOS() && window.location.replace('BIOS/bios.php');
         OSstarted = true;
         console.log('OS is starting up...');
         const canvas = document.getElementById('bootCanvas');
@@ -206,6 +206,6 @@ if (isset($server['forwarded'])) {
         // Initialize BIOS screen
         initBIOS();
         // Check if redirected from BIOS
-        isRedirectedFromBIOS() && window.location.replace('BIOS/main-setup.php');
+        isRedirectedFromBIOS() && window.location.replace('BIOS/bios.php');
     });
 </script>
