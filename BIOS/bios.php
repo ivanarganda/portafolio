@@ -209,6 +209,25 @@
         </div>
     </div>
     <script>
+        function changeContent(rows, selectedIndex) {
+            if (!rows[selectedIndex].classList.contains('bios-tab')) return;
+            let content_selector = rows[selectedIndex].textContent.trim().toLowerCase();
+            console.log('Selected content:', content_selector);
+            // Aquí puedes agregar la lógica para mostrar el contenido seleccionado
+            document.querySelectorAll('.bios-content').forEach(content => {
+                content.style.visibility = 'hidden';
+                content.querySelectorAll('.bios-panel .bios-row').forEach(row => {
+                    row.classList.remove('bios-row');
+                    row.classList.add('disabled');
+                });
+            });
+            const contentElement = document.getElementById(content_selector);
+            contentElement.style.visibility = 'visible';
+            contentElement.querySelectorAll('.bios-panel div[data-help]').forEach(row => {
+                row.classList.add('bios-row');
+                row.classList.remove('disabled');
+            });
+        }
         // Lógica para mostrar datos reales del dispositivo/navegador
         function getDeviceType() {
             const ua = navigator.userAgent;
@@ -250,7 +269,7 @@
         function updateBiosDateTime() {
             const now = new Date();
             document.getElementById('bios-date').textContent =
-                pad(now.getMonth()+1)+'/'+pad(now.getDate())+'/'+now.getFullYear();
+                pad(now.getDate())+'/'+pad(now.getMonth()+1)+'/'+now.getFullYear();
             document.getElementById('bios-time').textContent =
                 pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
         }
@@ -276,6 +295,18 @@
             if (e.target.closest('.bios-row')) {
                 const idx = activeRows.indexOf(e.target.closest('.bios-row'));
                 if (idx !== -1) selectRow(idx);
+            }
+        });
+
+        document.addEventListener('click', e => {
+            if (e.target.closest('.bios-row')) {
+                const activeRows = Array.from(getActiveRows());
+                const idx = activeRows.indexOf(e.target.closest('.bios-row'));
+                if (idx !== -1) {
+                    selectedIndex = idx;
+                    selectRow(selectedIndex);
+                    changeContent(activeRows, selectedIndex);
+                }
             }
         });
             
@@ -304,22 +335,8 @@
                 e.preventDefault();
             } else if (e.key === 'Enter') {
                 // Simula acción al presionar Enter
-                let content_selector = rows[selectedIndex].textContent.trim().toLowerCase();
-                console.log('Selected content:', content_selector);
-                // Aquí puedes agregar la lógica para mostrar el contenido seleccionado
-                document.querySelectorAll('.bios-content').forEach(content => {
-                    content.style.visibility = 'hidden';
-                    content.querySelectorAll('.bios-panel .bios-row').forEach(row => {
-                        row.classList.remove('bios-row');
-                        row.classList.add('disabled');
-                    });
-                });
-                const contentElement = document.getElementById(content_selector);
-                contentElement.style.visibility = 'visible';
-                contentElement.querySelectorAll('.bios-panel div[data-help]').forEach(row => {
-                    row.classList.add('bios-row');
-                    row.classList.remove('disabled');
-                });
+                e.preventDefault();
+                changeContent( rows, selectedIndex );
             }
         });
         selectRow(selectedIndex);

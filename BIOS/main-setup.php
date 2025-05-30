@@ -40,10 +40,6 @@
         <div class="bios-label">System Time:</div>
         <div class="bios-value" id="bios-time"></div>
     </div>
-    <div class="bios-row" style="margin-top:18px;">
-        <div class="bios-label"></div>
-        <div class="bios-value"><span class="cursor"></span></div>
-    </div>
 </div>
 <!-- RIGHT HELP PANEL -->
 <div class="bios-help">
