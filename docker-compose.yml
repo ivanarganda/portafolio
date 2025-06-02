@@ -1,0 +1,12 @@
+# Levantar un entorno de desarrollo con Docker Compose
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/var/www/html
